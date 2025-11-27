@@ -32,14 +32,13 @@ const tasks = document.querySelectorAll(".task");
 function addTask(taskTitle, taskDescription, column = todo) {
     const div = document.createElement("div");
 
-    div.classList.add("task");
+    div.classList.add("task","task-todo");
     div.setAttribute("draggable", "true");
     div.innerHTML = `
                         <h2>${taskTitle}</h2>
                     <p>${taskDescription}</p>
                     <button>Delete</button>
     `
-
     column.appendChild(div);
     div.addEventListener("dragstart", (e) => {
         dragElement = div;
@@ -77,6 +76,18 @@ function findTask(title) {
     const allTasks = Object.values(tasksData).flat();
     return allTasks.find(task => task.title.toLowerCase() === title.toLowerCase());
 
+}
+
+function setTaskStatusClass(taskElement,columnId){
+    taskElement.classList.remove("task-todo","task-progress","task-completed");
+
+    if(columnId==="todo"){
+        taskElement.classList.add("task-todo");
+    }else if(columnId==="progress"){
+        taskElement.classList.add("task-progress");
+    }else if(columnId==="completed"){
+        taskElement.classList.add("task-completed");
+    }
 }
 
 if (localStorage.getItem("tasks")) {
@@ -132,6 +143,7 @@ function addDragEventsOnColumn(column) {
             return;
         }
         column.appendChild(dragElement);
+        setTaskStatusClass(dragElement,to);
         updateTaskCount();
 
     })
