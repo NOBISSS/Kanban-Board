@@ -29,10 +29,20 @@ function showToast(message, duration = 2000) {
 
 const tasks = document.querySelectorAll(".task");
 
+function ApplyStyleBasedOnColumn(column){
+    if(column===todo){
+        return "task-todo";
+    }else if(column===progress){
+        return "task-progress";
+    }else if(column===completed){
+        return "task-completed";
+    }
+}
+
 function addTask(taskTitle, taskDescription, column = todo) {
     const div = document.createElement("div");
 
-    div.classList.add("task","task-todo");
+    div.classList.add("task",ApplyStyleBasedOnColumn(column));
     div.setAttribute("draggable", "true");
     div.innerHTML = `
                         <h2>${taskTitle}</h2>
