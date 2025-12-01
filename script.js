@@ -29,12 +29,12 @@ function showToast(message, duration = 2000) {
 
 const tasks = document.querySelectorAll(".task");
 
-function ApplyStyleBasedOnColumn(column){
-    if(column===todo){
+function ApplyStyleBasedOnColumn(column) {
+    if (column === todo) {
         return "task-todo";
-    }else if(column===progress){
+    } else if (column === progress) {
         return "task-progress";
-    }else if(column===completed){
+    } else if (column === completed) {
         return "task-completed";
     }
 }
@@ -42,7 +42,7 @@ function ApplyStyleBasedOnColumn(column){
 function addTask(taskTitle, taskDescription, column = todo) {
     const div = document.createElement("div");
 
-    div.classList.add("task",ApplyStyleBasedOnColumn(column));
+    div.classList.add("task", ApplyStyleBasedOnColumn(column));
     div.setAttribute("draggable", "true");
     div.innerHTML = `
                         <h2>${taskTitle}</h2>
@@ -88,14 +88,14 @@ function findTask(title) {
 
 }
 
-function setTaskStatusClass(taskElement,columnId){
-    taskElement.classList.remove("task-todo","task-progress","task-completed");
+function setTaskStatusClass(taskElement, columnId) {
+    taskElement.classList.remove("task-todo", "task-progress", "task-completed");
 
-    if(columnId==="todo"){
+    if (columnId === "todo") {
         taskElement.classList.add("task-todo");
-    }else if(columnId==="progress"){
+    } else if (columnId === "progress") {
         taskElement.classList.add("task-progress");
-    }else if(columnId==="completed"){
+    } else if (columnId === "completed") {
         taskElement.classList.add("task-completed");
     }
 }
@@ -122,7 +122,6 @@ tasks.forEach(task => {
 function addDragEventsOnColumn(column) {
     column.addEventListener("dragenter", (e) => {
         e.preventDefault();
-        console.log(dragElement);
         const from = dragElement.parentElement.id;
         const to = column.id;
 
@@ -146,14 +145,14 @@ function addDragEventsOnColumn(column) {
         column.classList.remove("hover-over");
         const from = dragElement.parentElement.id;
         const to = column.id;
-
+        if (from === to) return;
         if (!canMove(from, to)) {
             showToast(message.error_msg);
             column.classList.remove("blocked-drop")
             return;
         }
         column.appendChild(dragElement);
-        setTaskStatusClass(dragElement,to);
+        setTaskStatusClass(dragElement, to);
         updateTaskCount();
 
     })

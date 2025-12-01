@@ -140,7 +140,8 @@ section .task-column {
     box-shadow: 8px 8px 0.5px #000000fe;
     transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
     border: 1px solid #1a1a1a;
-    position: relative;/*NEW TYPE*/   
+    position: relative;
+    /*NEW TYPE*/
 }
 
 section .task-column.hover-over {
@@ -184,7 +185,7 @@ section .task-column .task {
     display: flex;
     flex-direction: column;
     gap: var(--padding-s);
-    cursor: grab;
+    cursor: grabbing;
 }
 
 section .task-column .task button {
@@ -198,20 +199,20 @@ section .task-column .task button {
     color: var(--primary-text-color);
     box-shadow:
         inset 10px 10px 13px black,
-        ;
+    ;
 }
 
-.task-todo{
-    border-left:3px solid #4da3ff;
+.task-todo {
+    border-left: 3px solid #4da3ff;
 }
 
-.task-progress{
-    border-left:3px solid #f0c24b;
+.task-progress {
+    border-left: 3px solid #f0c24b;
     background-color: #333024;
 }
 
-.task-completed{
-    border-left:3px solid #4ca450;
+.task-completed {
+    border-left: 3px solid #4ca450;
     background-color: #243326;
     opacity: 0.9;
 }
